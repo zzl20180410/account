@@ -1,56 +1,106 @@
 <template>
-  <div class="menu">
-    <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
+ <div :class="saidAotuClass">
+    <div style="height:30px;text-align: right;"><li :class="this.saidButoon" @click="saidAotu"></li></div>
+    <el-menu class="menu-Bar" :collapse="isCollapse"
+    background-color="#242424"
+    text-color="#B23AEE"
+    active-text-color="#CD0000"
+    :router="true"
+     default-active="1" >
+        <MenuTree :menuData="this.menuData"></MenuTree>
     </el-menu>
   </div>
 </template>
 
 <script>
+import MenuTree from "./MenuTree";
 export default {
-  name: 'Menu',
-  data () {
+  name: "Menu",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      isCollapse: false,
+      saidButoon:"el-icon-arrow-left",
+      saidAotuClass:"said-aotu-1",
+      menuData: []
+    };
+  },
+  created(){
+    //this.getMenu()
+  },
+  mounted(){
+    this.getMenu()
+  },
+  methods: {
+    getMenu() {
+        this.menuData = [
+        {
+          id: 1,
+          index:"1",
+          parent_id: 0,
+          menu_name: "第一级菜单 1",
+          sorting: 0,
+          icon:"el-icon-message",
+          node: [
+              {
+              id: 2,
+              index:"/",
+              parent_id: 1,
+              menu_name: "第二级菜单 1-1",
+              sorting: 0,
+              icon:"el-icon-message",
+            }
+
+          ]
+        },
+        {
+          id: 4,
+          index:"2",
+          parent_id: 0,
+          menu_name: "第一级菜单 2",
+          sorting: 0,
+          icon:"el-icon-phone",
+          node: [
+            {
+              id: 5,
+              index:"/d",
+              parent_id: 4,
+              menu_name: "第二级菜单 2-1",
+              sorting: 0,
+              icon:"el-icon-service",
+            }
+          ]
+        }
+      ]
+    },
+    saidAotu(){
+      this.isCollapse = !this.isCollapse;
+      if(this.isCollapse){
+        this.saidButoon = "el-icon-arrow-right";
+        this.saidAotuClass = "said-aotu-2";
+      }else{
+        this.saidAotuClass = "said-aotu-1";
+        this.saidButoon = "el-icon-arrow-left";
+      }    
     }
+  },
+  components: {
+    "MenuTree": MenuTree,
+    
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .said-aotu-1{
+    
+  }
+  .said-aotu-2{
+    
+    width: 80px;
+  }
+   /* .menu-Bar:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  } */
 </style>

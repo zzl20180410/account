@@ -4,8 +4,8 @@
       <el-header class="account-header"><Header></Header></el-header>
 
       <el-container class="account-conter">
-        <el-aside class="conter-aside"><Menu></Menu></el-aside>
-        <el-main class="conter-main"><router-view></router-view></el-main>
+        <el-aside  class="conter-aside"><Menu></Menu></el-aside>
+        <el-main  class="conter-main"><router-view></router-view></el-main>
       </el-container>
 
       <el-footer class="account-footer"><Footer></Footer></el-footer>
@@ -49,7 +49,7 @@ export default {
         width: 230px;
         /* height: 100%; */
         height: auto;
-        background-color: bisque;
+        /* background-color: bisque; */
 
     }
     .conter-main{
